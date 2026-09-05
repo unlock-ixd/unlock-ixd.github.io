@@ -1,6 +1,7 @@
 _site/
 node_modules/
 .local-backups/
+.github/
 
 # OS files
 Thumbs.db
