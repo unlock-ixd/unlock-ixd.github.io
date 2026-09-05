@@ -8,3 +8,15 @@ Thumbs.db
 
 # Internal editorial notes (not for publishing)
 text-feedback.csv
+
+# Editor / workspace
+.vscode/
+*.code-workspace
+
+# Development docs
+IMAGE-GUIDE.md
+
+# Node
+package.json
+package-lock.json
+node_modules/

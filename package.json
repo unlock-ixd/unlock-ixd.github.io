@@ -1,6 +1,0 @@
-{
-  "name": "unlock-seminar",
-  "private": true,
-  "scripts": { "build": "node scripts/build.mjs", "dev": "node scripts/serve.mjs", "check": "node scripts/check.mjs" },
-  "engines": { "node": ">=20" }
-}
