@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "LP: リンクを検査（ファイル変更なし）",
+      "type": "process",
+      "command": "node",
+      "args": ["scripts/check.mjs"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    }
+  ]
+}

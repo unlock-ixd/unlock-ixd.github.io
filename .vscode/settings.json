@@ -1,0 +1,12 @@
+{
+  "livePreview.serverRoot": "",
+  "livePreview.defaultPreviewPath": "/index.html",
+  "livePreview.openPreviewTarget": "Embedded Preview",
+  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+  "livePreview.hostIP": "127.0.0.1",
+  "livePreview.portNumber": 3000,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.host": "127.0.0.1",
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.ignoreFiles": ["**/.git/**", "**/_site/**", "**/.local-backups/**"]
+}
