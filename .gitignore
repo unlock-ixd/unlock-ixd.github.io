@@ -1,2 +1,10 @@
 _site/
 node_modules/
+.local-backups/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Internal editorial notes (not for publishing)
+text-feedback.csv
