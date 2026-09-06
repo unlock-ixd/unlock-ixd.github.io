@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="60" height="30" role="img" aria-label="鍵b">
+  <rect x="5" y="13" width="34" height="4" rx="2" fill="#20211f"/>
+  <rect x="8.5" y="17" width="3.5" height="7" rx="1.2" fill="#20211f"/>
+  <rect x="15.5" y="17" width="3.5" height="5" rx="1.2" fill="#20211f"/>
+  <path d="M40 6.2 56.5 15 40 23.8Z" fill="none" stroke="#20211f" stroke-width="4" stroke-linejoin="round"/>
+</svg>
