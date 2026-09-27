@@ -334,3 +334,56 @@
   setupKey();
   setupReveal();
 })();
+
+// プロフィール写真は4秒ごとにA→B→C。画像パスは各HTMLで編集します。
+(function setupProfilePhotos() {
+  document.querySelectorAll('.profile-slideshow').forEach((frame) => {
+    const image = frame.querySelector('.profile-image');
+    const sources = frame.dataset.images.split(/\s+/).filter(Boolean);
+    const controls = frame.querySelector('.profile-photo-controls');
+    const choices = [...frame.querySelectorAll('[data-photo]')];
+    const pause = frame.querySelector('.profile-photo-pause');
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const originalAlt = image.alt;
+    let index = 0, timer, request = 0;
+    let paused = motion.matches, hover = false, focused = false, visible = true;
+    controls.hidden = false;
+    const label = () => { pause.textContent = paused ? '自動再生' : '一時停止'; };
+    function schedule() {
+      clearTimeout(timer);
+      if (!paused && !hover && !focused && visible && !document.hidden) {
+        timer = setTimeout(() => show((index + 1) % sources.length), 4000);
+      }
+    }
+    function show(next) {
+      clearTimeout(timer);
+      const ticket = ++request;
+      const loaded = new Image();
+      loaded.onload = () => {
+        if (ticket !== request) return;
+        image.src = sources[next];
+        image.alt = originalAlt + '（写真' + 'ABC'[next] + '）';
+        index = next;
+        choices.forEach((button, n) => button.setAttribute('aria-pressed', String(n === index)));
+        if (!motion.matches && image.animate) image.animate([{opacity: .65},{opacity: 1}], {duration: 350});
+        schedule();
+      };
+      loaded.onerror = () => { if(ticket === request) { paused = true; label(); } };
+      loaded.src = sources[next];
+    }
+    pause.addEventListener('click', () => { paused = !paused; label(); schedule(); });
+    choices.forEach(button => button.addEventListener('click', () => {
+      paused = true; label(); show(Number(button.dataset.photo));
+    }));
+    frame.addEventListener('mouseenter', () => { hover = true; schedule(); });
+    frame.addEventListener('mouseleave', () => { hover = false; schedule(); });
+    frame.addEventListener('focusin', () => { focused = true; schedule(); });
+    frame.addEventListener('focusout', event => { focused = frame.contains(event.relatedTarget); schedule(); });
+    document.addEventListener('visibilitychange', () => { if(document.hidden) request++; schedule(); });
+    motion.addEventListener('change', () => { if(motion.matches) { paused=true; request++; label(); schedule(); } });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => { visible = entries[0].isIntersecting; schedule(); }).observe(frame);
+    }
+    label(); schedule();
+  });
+})();
